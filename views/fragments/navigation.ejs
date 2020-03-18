@@ -1,0 +1,45 @@
+<header class="main-header">
+    <nav class="main-header__nav">
+        <ul class="main-header__item-list">
+
+
+            <li class="main-header__item"><a href="/">MY Shop</a></li>
+
+
+            <% if (isAuthenticated  &&isAdmin) {%>
+
+
+                <li class="main-header__item"><a class="" href="/admin/add-product">Add Product</a></li>
+
+                <%}%>
+
+
+                    <% if (isAuthenticated && !isAdmin) {%>
+
+                        <li class="main-header__item"><a class="" href="/cart">Cart</a></li>
+                        <li class="main-header__item"><a class="" href="/order">orders</a></li>
+
+
+                        <%}%>
+
+                            <!-- <li class="main-header__item"><a href="/">Contact us</a></li> -->
+
+
+                            <% if (!isAuthenticated) { %>
+
+
+                                <li class="main-header__item" align="left"><a class="" href="/login">Login</a></li>
+                                <li class="main-header__item"><a class="" href="/signUp">signUp</a></li>
+                                <% } else { %>
+
+
+                                    <li class="main-header__item">
+                                        <form action="/logout" method="post">
+                                            <button type="submit">  logout</button>
+                                        </form>
+                                    </li>
+
+                                    <% }  %>
+        </ul>
+    </nav>
+</header>

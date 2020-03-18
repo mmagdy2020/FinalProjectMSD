@@ -1,0 +1,35 @@
+<!--include head.ejs-->
+<%- include('fragments/head.ejs')%>
+
+    <link rel="stylesheet" href="/css/forms.css">
+    <link rel="stylesheet" href="/css/product.css">
+    </head>
+
+    <body>
+
+        <!--include navigation.ejs-->
+        <%- include('fragments/navigation.ejs')%>
+
+            <center>
+
+                <div class="container">
+                    <form action="/admin/edit-product" method="post">
+                        <input type="hidden" name="id" value="<%= prod._id%>">
+                        <!-- <label for="id">ID:</label><br>
+                        <input type="text" id="id" name="id" value="<%= prod.id%>" readonly><br> -->
+                        <label for="title">Title:</label><br>
+                        <input type="text" id="title" name="title" value="<%= prod.title%>"><br>
+                        <label for="imageUrl">Image URL:</label><br>
+                        <input type="text" id="imageUrl" name="imageUrl" value="<%= prod.imageUrl%>"><br><br>
+                        <label for="price">Price:</label><br>
+                        <input type="number" id="price" name="price" value="<%= prod.price%>"><br><br>
+                        <label for="description">Description:</label><br>
+                        <textarea name="desc"><%= prod.desc%></textarea> <br><br>
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+
+            </center>
+
+            <!--include end.ejs-->
+            <%- include('fragments/end.ejs')%>

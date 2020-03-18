@@ -1,0 +1,114 @@
+<%- include('fragments/head.ejs')%>
+
+    <link rel="stylesheet" href="/css/forms.css">
+    <link rel="stylesheet" href="/css/product.css">
+    </head>
+
+    <body>
+
+        <!--include navigation.ejs-->
+        <%- include('fragments/navigation.ejs')%>
+
+
+            <center>
+                <div class="container mb-4">
+                    <div class="row">
+
+                        <% if (products.length > 0) { %>
+                            <% let totalPrice = 0%>
+
+                                <div class="col-12">
+
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col"> </th>
+                                                    <th scope="col">Product Name </th>
+                                                    <th scope="col">Available</th>
+                                                    <th scope="col" class="text-center">Quantity</th>
+                                                    <th scope="col" class="text-right">Item Price</th>
+                                                    <th scope="col" class="text-right">total Price</th>
+
+                                                    <th> </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% products.forEach(p => { %>
+
+                                                    <tr>
+                                                        <td>
+                                                            <img src="<%=p.productId.imageUrl%>" alt="A pic" width="42" height="42">
+                                                        </td>
+                                                        <td>
+                                                            <%= p.productId.title%>
+                                                        </td>
+                                                        <td>In stock</td>
+                                                        <td><input class="form-control" type="text" value="<%= p.qty %>" readonly /></td>
+                                                        <td class="text-right">
+                                                            <%= p.productId.price %> $
+                                                        </td>
+                                                        <td class="text-right">
+                                                            <%= p.productId.price* p.qty%> $
+                                                                <% totalPrice+= (p.productId.price* p.qty)%>
+                                                        </td>
+                                                        <!-- Create a delete Button -->
+                                                        <td class="text-right">
+
+                                                        </td>
+
+                                                    </tr>
+
+                                                    <% }) %>
+
+                                                        <tr>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td><br><br></td>
+                                                            <td align="left">Sub-Total </td>
+                                                            <td class="text-right">
+                                                                <%= totalPrice%> $
+                                                            </td>
+                                                        </tr>
+
+
+                                            </tbody>
+                                        </table>
+
+                                        <br>
+                                        <div class="centered">
+                                            <button class=btn id="orderME"> Order </button>
+                                            <script src="https://js.stripe.com/v3/"></script>
+                                            <script>
+                                                let stripe = Stripe(`pk_test_AoNBTT4VuwLFmpkSzbVnqXXL00izuBiEL4`)
+                                                let orderButton = document.getElementById('orderME')
+                                                orderButton.addEventListener('click', function() {
+                                                    stripe.redirectToCheckout({
+                                                        sessionId: '<%= sessionId %>'
+                                                    })
+                                                })
+                                            </script>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <% } else { %>
+                                    <h1>No Products in Cart!</h1>
+                                    <% } %>
+                    </div>
+                </div>
+
+            </center>
+
+
+            <%- include('fragments/end.ejs')%>
+
+
+                <!-- 
+
+// we need to add a link to each of the item, 
+// we need to enable adding from the shopping cart.active
+
+             -->

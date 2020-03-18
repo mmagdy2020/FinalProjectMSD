@@ -1,0 +1,36 @@
+<!--include head.ejs-->
+<%- include('fragments/head.ejs')%>
+
+    <link rel="stylesheet" href="/css/forms.css">
+    <link rel="stylesheet" href="/css/product.css">
+    </head>
+
+    <body>
+
+        <!--include navigation.ejs-->
+        <%- include('fragments/navigation.ejs')%>
+
+            <center>
+                <div class="row">
+
+                    <div class="col-m-12">
+                        <h1>
+                            <%=product.title%>
+                        </h1>
+                        <p><img src="../<%= product.imageUrl %>" alt="A Book" width="500" height="500"></p>
+
+                        <p>price:
+                            <%=product.price %>
+                        </p>
+
+                        <p>description:
+                            <%=product.desc %>
+                        </p>
+
+                    </div>
+                </div>
+
+            </center>
+
+            <!--include end.ejs-->
+            <%- include('fragments/end.ejs')%>
