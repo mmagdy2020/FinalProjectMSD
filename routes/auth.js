@@ -7,9 +7,8 @@ const flash = require('flash-express')
 
 const router = express.Router();
 
-const { check } = require('express-validator') //all validation logic 
-    //JS object..
-    //only for POST ....
+const { check, body } = require('express-validator') //all validation logic 
+
 
 
 router.get('/login', authController.getLogin);
@@ -20,6 +19,15 @@ router.post('/logout', authController.postLogOut); //I  should create form inste
 
 
 router.get('/signup', authController.getUserSignUP)
-router.post('/signup', check('email').isEmail(), authController.postSignUp);
+router.post('/signup', [check('name', "name should be not empty and not contain number").notEmpty(), check('email').isEmail().withMessage('Please write a valid email..'),
+    check('password', 'Password must be more than 4 digit. ').isLength({ min: 5 }),
+    body('cpassword').custom((value, { req }) => {
+        if (value === req.body.password) {
+            return true
+        } else {
+            throw new Error('password should match the Confirmed password')
+        }
+    })
+], authController.postSignUp);
 
 module.exports = router;

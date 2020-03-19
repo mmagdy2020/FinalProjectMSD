@@ -3,7 +3,7 @@
         <ul class="main-header__item-list">
 
 
-            <li class="main-header__item"><a href="/">MY Shop</a></li>
+            <li class="main-header__item"><a href="/">Game Store</a></li>
 
 
             <% if (isAuthenticated  &&isAdmin) {%>
@@ -12,7 +12,6 @@
                 <li class="main-header__item"><a class="" href="/admin/add-product">Add Product</a></li>
 
                 <%}%>
-
 
                     <% if (isAuthenticated && !isAdmin) {%>
 
@@ -24,22 +23,21 @@
 
                             <!-- <li class="main-header__item"><a href="/">Contact us</a></li> -->
 
-
                             <% if (!isAuthenticated) { %>
-
 
                                 <li class="main-header__item" align="left"><a class="" href="/login">Login</a></li>
                                 <li class="main-header__item"><a class="" href="/signUp">signUp</a></li>
                                 <% } else { %>
 
-
-                                    <li class="main-header__item">
+                                    <li class="main-header__item" align="right">
                                         <form action="/logout" method="post">
-                                            <button type="submit">  logout</button>
+                                            <button class="btn" type="submit">  logout</button>
                                         </form>
                                     </li>
 
                                     <% }  %>
         </ul>
+
+
     </nav>
 </header>

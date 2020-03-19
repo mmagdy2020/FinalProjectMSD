@@ -1,0 +1,5 @@
+{
+    "env": {
+        "mongoCLoud_url": "mongodb+srv://admin:admin@onlineshoppingcluster-tw6tj.gcp.mongodb.net/onlineShopping"
+    }
+}

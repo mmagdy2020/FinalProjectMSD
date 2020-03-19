@@ -111,9 +111,9 @@ app.use((req, res, next) => {
     }
 });
 
-app.use(function(err, req, res, next) {
-    res.status(500).send('Something broke!');
-});
+// app.use(function(err, req, res, next) {
+//     res.status(500).send('Something broke!');
+// });
 
 
 

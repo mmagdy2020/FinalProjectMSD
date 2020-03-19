@@ -1,20 +1,8 @@
 const Product = require('../models/product');
 
 const Order = require('../models/order')
-const moment = require('moment')
 
 const stripe = require('stripe')('sk_test_fett5YnZvGzkgsm8c8rY9Mi6002jHssCdm') // private Key from my account..
-
-/*
-
-.select('title Price)
-        .populate('userId')   // will show all of the field for the UserId as it reference. 
-
-.select('title price - _id')
-
-*/
-
-
 
 // 3- router.get(['/', 'products'], shopController.getAllProducts);
 exports.getAllProducts = (req, res, next) => {
@@ -25,7 +13,7 @@ exports.getAllProducts = (req, res, next) => {
         .then(product => {
             // console.log(product)
             console.log("=--------------=")
-            res.render('shop', { 'prods': product, path: 'admin/product' });
+            res.render('shop', { 'prods': product, path: 'admin/product', 'pageTitle': 'Products-Shop' });
         }).catch(err => console.log(err))
 }
 
@@ -36,7 +24,7 @@ exports.getProductDetails = (req, res, next) => {
     const prodId = req.params.prodId // get the prod ID from the view.....
     Product.findById(prodId)
         .then(doc => {
-            res.render('product-detail', { 'product': doc })
+            res.render('product-detail', { 'product': doc, 'pageTitle': 'Product-details' })
                 // console.log(doc)
 
         }).catch(err => console.log(err))
@@ -55,11 +43,11 @@ exports.getCart = (req, res, next) => {
             .then(user => {
                 // console.log(user.cart.items) // so our
                 const products = user.cart.items // 
-                res.render('cart', { "products": products }) // the products will named as productId // Important.....
+                res.render('cart', { "products": products, 'pageTitle': 'User-Cart' }) // the products will named as productId // Important.....
             }).catch(err => console.log(err))
     } else {
         let products = []
-        res.render('cart', { "products": products })
+        res.render('cart', { "products": products, 'pageTitle': 'User-Cart' })
     }
 
 }
@@ -128,14 +116,14 @@ exports.getCheckOut = (req, res, next) => {
                     })
                     .then(session => {
                         console.log(session.id)
-                        res.render('checkout', { "products": products, sessionId: session.id }) //sessionId we should to add it to HTML...
+                        res.render('checkout', { "products": products, sessionId: session.id, 'pageTitle': 'CheckOut' }) //sessionId we should to add it to HTML...
 
                     })
 
             }).catch(err => console.log(err))
     } else {
         let products = []
-        res.render('checkout', { "products": products })
+        res.render('checkout', { "products": products, 'pageTitle': 'CheckOut' })
     }
 
 }
@@ -178,7 +166,7 @@ exports.getFinalOrder = (req, res, next) => {
     Order.find({ "user.userId": req.user._id }) // we can use find to locate all of the order for this userID... 
         .then(orders => {
             console.log(orders)
-            res.render('order', { orders: orders, date: moment().format("MMM Do YY") })
+            res.render('order', { orders: orders, 'pageTitle': 'User-Orders' })
         })
         .catch(err => console.log(err))
 }

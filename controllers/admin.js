@@ -9,7 +9,7 @@ const Product = require('../models/product');
 
 //  1-  router.get('/add-product', productController.getProduct)
 exports.getProduct = (req, res, next) => {
-    res.render('add-product', { 'pageTitle': 'My Add Product Page', path: 'admin/product' });
+    res.render('add-product', { 'pageTitle': 'Add Product', path: 'admin/product' });
 
 };
 //  2- router.post('/add-product', productController.postProduct)
@@ -45,7 +45,7 @@ exports.getEditProduct = (req, res, next) => {
     Product.findById(prodId)
         .then(product => {
             console.log("product Saved afterEdit..., will render edit Page with by Id... ")
-            res.render('edit-product', { 'prod': product })
+            res.render('edit-product', { 'prod': product, 'pageTitle': 'edit Product' })
         }).catch(err => console.log(err))
 }
 

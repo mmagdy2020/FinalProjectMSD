@@ -6,13 +6,12 @@ const { validationResult } = require('express-validator')
 
 
 
-// const flash = require('connect-flash')
-
+const flash = require('connect-flash')
 
 
 exports.getLogin = (req, res, next) => {
     // res.session.isl
-    res.render('userLogin', { errorMessage: req.flash('loginErr') })
+    res.render('userLogin', { errorMessage: req.flash('loginErr'), 'pageTitle': 'User Login' })
 };
 
 
@@ -37,14 +36,14 @@ exports.postLogin = (req, res, next) => {
                                 res.redirect('/');
                             })
                         } else {
-                            req.flash('loginErr', 'Invalid Username and Password!');
+                            req.flash('loginErr', 'Invalid Username or Password!');
                             console.log("wrong User&Pass")
                             res.redirect('/login');
                         }
                     });
             } else {
 
-                // req.flash('loginErr', 'Invalid Username and Password!');
+                req.flash('loginErr', 'Invalid Username or Password!');
                 console.log("wrong User&Pass")
 
                 res.redirect('/login');
@@ -52,37 +51,6 @@ exports.postLogin = (req, res, next) => {
         }).catch(err => {
             console.log(err);
         });
-
-
-    // User.findOne({ email: email })
-    //     .then(user => {
-    //         if (!user) {
-    //             console.log("can't find the user...")
-    //             return res.redirect('/login')
-    //         }
-
-    //         // need to understand more specially Async...
-
-    //         bcrypt.compare(password, user.password) //this will return a promise and it will compare the password with what I have in the DB...
-    //             .then(result => {
-    //                 if (result) { // here we will set all of the session as the use will logged in successfully.. 
-    //                     console.log("User logged in with valid Email and Pass")
-    //                     req.session.isLoggedIn = true // this will create a session cookie named connect.io...
-    //                     res.session.user = user // very Important.......
-    //                     return res.session.save(err => {
-    //                         console.log(err)
-    //                         res.redirect('/')
-    //                     })
-    //                 } else {
-    //                     res.redirect('/login')
-
-    //                 }
-
-    //             })
-
-    //     })
-
-
 
 }
 
@@ -98,7 +66,7 @@ exports.postLogOut = (req, res, next) => {
 exports.getUserSignUP = (req, res, next) => {
 
     console.log("user will signup Up...")
-    res.render('signup', { signupMessage: 'signupMessage' })
+    res.render('signup', { signupMessage: 'signupMessage', 'pageTitle': 'SignUp Page' })
 };
 
 
@@ -115,7 +83,7 @@ exports.postSignUp = (req, res, next) => {
 
     console.log(errors.array())
     if (!errors.isEmpty()) {
-        return res.status(422).render('signup', { signupMessage: errors.array() })
+        return res.status(422).render('signup', { signupMessage: errors.array(), 'pageTitle': 'SignUp Page' })
     }
 
     User.findOne({ email: email })

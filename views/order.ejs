@@ -12,22 +12,22 @@
         <!--include navigation.ejs-->
         <%- include('fragments/navigation.ejs')%>
 
-
-
             <main>
                 <% if (orders.length <= 0) { %>
                     <h1>Nothing there!</h1>
                     <% } else { %>
-                        <% number = 0%>
+                        <% number = 1000%>
                             <ul class="orders">
                                 <% orders.forEach(order => { %>
                                     <li class="orders__item">
 
-                                        <h1>Order
-                                            <%= ++number%> - #
-                                                <%= order._id %> on Date:
-                                                    <%=date %>
+                                        <h1>Order#
+                                            <%= ++number%>
+                                                <%= %>
                                         </h1>
+
+                                        <div>
+                                        </div>
                                         <ul class="orders__products">
                                             <% order.products.forEach(p => { %>
                                                 <li class="orders__products-item">
@@ -36,7 +36,7 @@
                                                         <%= p.product.title %>
                                                     </a> -- -- --
                                                     <%= p.qty %>
-                                                        --------
+                                                        -------- $
                                                         <%= p.product.price %>
                                                 </li>
                                                 <% }); %>
@@ -48,6 +48,5 @@
                             </ul>
                             <% } %>
             </main>
-
 
             <%- include('fragments/end.ejs')%>
