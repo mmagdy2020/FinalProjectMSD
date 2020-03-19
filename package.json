@@ -8,7 +8,7 @@
     },
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "mongoCLoud_url= mongodb+srv://admin:admin@onlineshoppingcluster-tw6tj.gcp.mongodb.net/onlineShopping nodemon app",
+        "start": "set mongoCLoud_url= mongodb+srv://admin:admin@onlineshoppingcluster-tw6tj.gcp.mongodb.net/onlineShopping && nodemon app",
         "inspect": "node --inspect app"
     },
     "author": "MSD - MO, SoPhia Deressa",
